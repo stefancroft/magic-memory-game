@@ -1,10 +1,22 @@
-## Very simple React event app for listing and deleting a number of events including the title, date and location
+# Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
+
+and 
+
+json-server --watch data/db.json
+
+It uses hooks
+
+load:
+
+http://localhost:3000/trips
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.

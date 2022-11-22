@@ -8,11 +8,7 @@ import NewEventForm from './components/NewEventForm'
 function App() {
   const [showModal, setShowModal] = useState(false)
   const [showEvents, setShowEvents] = useState(true)
-  const [events, setEvents] = useState([
-    {title: "mario's birthday bash", id: 1},
-    {title: "bowser's live stream", id: 2},
-    {title: "race on moo moo farm", id: 3}
-  ])
+  const [events, setEvents] = useState([])
 
   const handleClick = (id) => {
     setEvents(prevEvents => {
@@ -20,33 +16,39 @@ function App() {
     })
   }
 
-  const handleClose = () => {
+  // this function takes in as an areguemnt an event object
+  // and that will be the new event that we want to add to this state
+// Prev events is the current state
+  const addEvent = (event) => {
+    setEvents((prevEvents) => {
+      return [...prevEvents, event]
+    })
     setShowModal(false)
   }
+// Returns a new array, where we take the previous 
+// and spreads them into the new array and also adds the new event as well
 
-  const subtitle = "All the latest events in Marioland"
+  const subtitle = "For keeping notes of events"
 
   return (
     <div className="App">
-      <Title title="Marioland Events" subtitle={subtitle} />
+      <Title title="Event Pad" subtitle={subtitle} />
       
       {showEvents && (
         <div>
-          <button onClick={() => setShowEvents(false)}>Hide Events</button>
+          <button onClick={() => setShowEvents(false)}>Hide</button>
         </div>
       )}
       {!showEvents && (
         <div>
-          <button onClick={() => setShowEvents(true)}>Show Events</button>
+          <button onClick={() => setShowEvents(true)}>Show</button>
         </div>
       )}
       {showEvents && <EventList events={events} handleClick={handleClick} />}
       
-      {showModal && (
-        <Modal handleClose={handleClose}>
-          <NewEventForm />
-        </Modal>
-      )}
+      {showModal && <Modal isSalesModal={true}>
+          <NewEventForm addEvent={addEvent}/>
+        </Modal>}
 
       <div>
         <button onClick={() => setShowModal(true)}>Add New Event</button>
